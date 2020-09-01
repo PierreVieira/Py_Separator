@@ -1,4 +1,4 @@
-from src.classes.arquivo_json import ArquivoJson
+from src.model.arquivo_json import ArquivoJson
 
 
 def alimentar_json(words_from_file):

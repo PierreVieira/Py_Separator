@@ -1,6 +1,6 @@
 import json
 
-from src.classes.collector import Collector
+from src.model.collector import Collector
 
 
 class ArquivoJson:
