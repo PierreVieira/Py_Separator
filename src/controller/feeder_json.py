@@ -1,8 +1,8 @@
-from src.model.arquivo_json import ArquivoJson
+from src.model.internal_memory import InternalMemory
 
 
 def alimentar_json(words_from_file):
-    json = ArquivoJson('../files/words.json')
+    json = InternalMemory('../../files/json/words.json')
     for word in words_from_file:
         dict_palavra = None
         try:

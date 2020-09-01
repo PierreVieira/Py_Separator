@@ -1,0 +1,11 @@
+{
+  "cachorro": {
+    "palavra": "cachorro",
+    "silabas": "ca-chor-ro",
+    "tonicidade": "paroxítona",
+    "silaba_forte": "chor",
+    "quantidade_silabas": 3,
+    "quantidade_letras": 8,
+    "sentido_inverso": "orrohcac"
+  }
+}

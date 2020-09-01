@@ -1,6 +1,26 @@
-def pega_silabas_filtradas(palavras):
-    print(palavras)
-    return ''
+import src.constants as consts
+from src.model.internal_memory import InternalMemory
+
+
+def pega_silabas_filtradas(palavras, cache):
+    list_syllabales = []
+    for palavra in palavras:
+        value_sucess = None
+        posicao = consts.char_map_position[palavra[0]]
+        try:  # Tente puxar a palavra da cache
+            value_sucess = cache[posicao][palavra]
+        except KeyError:  # A palavra não está na cache
+            internal_memory = InternalMemory()
+            try:  # Tente puxar a palavra da memória interna
+                value_sucess = internal_memory.get_word(palavra)
+            except KeyError:  # A palavra não está na memória interna
+                # A palavra deve ser inserida na memória interna
+                value_sucess = internal_memory.insert(palavra)
+        finally:
+            if value_sucess is None:
+                raise ValueError('value_sucess deve ser diferente de None.')
+            else:
+                list_syllabales.append(value_sucess)
 
 
 def make_io(silabas_filtradas):
