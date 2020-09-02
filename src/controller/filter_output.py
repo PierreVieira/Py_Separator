@@ -19,9 +19,11 @@ def pega_silabas_filtradas(palavras, cache, internal):
                     raise ValueError(f'Palavra que deu merda: {palavra}\nvalue_sucess deve ser diferente de None.')
                 else:
                     cache.current_cache[posicao][0][palavra] = value_sucess
-
         finally:
-            list_syllabales.extend(value_sucess.split('-'))
+            if type(value_sucess) == dict:
+                list_syllabales.extend(value_sucess[palavra].split('-'))
+            else:
+                list_syllabales.extend(value_sucess.split('-'))
     return list(set(list_syllabales))
 
 
