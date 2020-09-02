@@ -1,29 +1,39 @@
 import src.constants as consts
-from src.model.internal_memory import InternalMemory
 
 
-def pega_silabas_filtradas(palavras, cache):
+def pega_silabas_filtradas(palavras, cache, internal):
     list_syllabales = []
     for palavra in palavras:
         value_sucess = None
-        posicao = consts.char_map_position[palavra[0]]
+        posicao = consts.char_map_position[consts.mapping_letter[palavra[0]].upper()]
         try:  # Tente puxar a palavra da cache
-            value_sucess = cache[posicao][palavra]
+            value_sucess = cache.current_cache[posicao][0][palavra]
         except KeyError:  # A palavra não está na cache
-            internal_memory = InternalMemory()
             try:  # Tente puxar a palavra da memória interna
-                value_sucess = internal_memory.get_word(palavra)
+                value_sucess = internal.get_word(palavra)
             except KeyError:  # A palavra não está na memória interna
                 # A palavra deve ser inserida na memória interna
-                value_sucess = internal_memory.insert(palavra)
+                value_sucess = internal.insert(palavra)
+            finally:
+                if value_sucess is None:
+                    raise ValueError(f'Palavra que deu merda: {palavra}\nvalue_sucess deve ser diferente de None.')
+                else:
+                    cache.current_cache[posicao][0][palavra] = value_sucess
+
         finally:
-            if value_sucess is None:
-                raise ValueError('value_sucess deve ser diferente de None.')
-            else:
-                list_syllabales.append(value_sucess)
+            list_syllabales.extend(value_sucess.split('-'))
+    return list(set(list_syllabales))
 
 
-def make_io(silabas_filtradas):
+def remove_acentos(silaba):
+    string = ''
+    for c in silaba:
+        string += consts.mapping_letter[c]
+    return string
+
+
+def make_output(silabas_filtradas):
+    silabas_filtradas = tuple(sorted(set(map(remove_acentos, silabas_filtradas))))
     string_io = ''
     vogal_recorrente = silabas_filtradas[0][0]
     for silaba in silabas_filtradas:

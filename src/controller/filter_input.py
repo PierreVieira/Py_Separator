@@ -7,12 +7,10 @@ def filtrar_palavra(palavra):
 
 
 def filtrar_linha(linha):
-    linha_sem_quebra = linha.strip()
+    linha_sem_quebra = linha.strip('\n')
     palavras = linha_sem_quebra.split()
-    palavras_filtradas = []
-    for palavra in palavras:
-        palavras_filtradas.append(filtrar_palavra(palavra.lower()))
-    return list(filter(lambda palavra: len(palavra) > 0, palavras_filtradas))
+    palavras_filtradas = [filtrar_palavra(palavra.lower()) for palavra in palavras]
+    return list(set(filter(lambda palavra: len(palavra) > 0, palavras_filtradas)))
 
 
 def pega_conteudo_filtrado(input_text):
@@ -22,4 +20,4 @@ def pega_conteudo_filtrado(input_text):
             continue
         linha_filtrada = filtrar_linha(linha)
         linhas_filtradas.extend(linha_filtrada)
-    return linhas_filtradas
+    return list(sorted(set(p for p in linhas_filtradas)))

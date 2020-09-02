@@ -1,11 +1,1 @@
-{
-  "cachorro": {
-    "palavra": "cachorro",
-    "silabas": "ca-chor-ro",
-    "tonicidade": "paroxítona",
-    "silaba_forte": "chor",
-    "quantidade_silabas": 3,
-    "quantidade_letras": 8,
-    "sentido_inverso": "orrohcac"
-  }
-}
+{"cachorro": "ca-chor-ro", "cacos": "ca-cos", "cada": "ca-da", "caminho": "ca-mi-nho", "cantando": "can-tan-do", "carro": "car-ro", "cidade": "ci-da-de", "claro": "cla-ro", "como": "co-mo", "conhece": "co-nhe-ce", "céu": "céu"}

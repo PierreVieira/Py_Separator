@@ -22,7 +22,7 @@ class Collector:
         filtred_string1 = self._filter_remove_tag_font(string_req)
         string_syllabale = self._indentify_syllabales(filtred_string1)
         return {
-            'silabas': string_syllabale,
+            self.word: string_syllabale,
         }
 
     def _filter_remove_tag_font(self, string_req: str):
